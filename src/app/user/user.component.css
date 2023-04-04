@@ -1,0 +1,26 @@
+td{
+    text-align: center;
+    background-color: silver;
+    border: 1px solid;
+    border-color: white;    
+}
+
+
+button {
+    padding: 5px;
+    border: 1px solid black;
+    width: 60px;
+    font-weight: bold;
+}
+
+button.delete{
+    background-color:red;
+    color: black;
+    
+}
+
+button.modifica{
+    background-color:green;
+    color: black;
+    
+}

@@ -1,0 +1,49 @@
+<form class="userForm" #f="ngForm">
+    <div class = "form_title">
+        <label  *ngIf="utente!.id>0" for="nome">Modifica dati</label>        
+        <label  *ngIf="utente!.id==-1" for="nome">Inserimento</label>        
+           
+    </div>
+    <input type="hidden" name="id" [ngModel]="utente!.id">
+    <div class = "form_group">
+        <label for="nome">Nome</label>        
+        <input name = "nome" class = "form-control" id = "nome" [(ngModel)]="utente!.name" >    
+        <label for="cognome">Cognome</label>        
+        <input name = "cognome" class = "form-control" id = "cognome" [(ngModel)]="utente!.lastname" >        
+        <label for="cfis">Codice fiscale</label>        
+        <!--<input name = "cfis" id = "cfis" value="{{ utente?.fiscalcode }}">    passare solo il dato, invece con ngModule viene aggiornato anche 
+        se uso [input] se uso () output, se uso entrambe sia input che output-->
+        <input name = "cfis" class = "form-control" id = "cfis" [(ngModel)]="utente!.fiscalcode">        
+        <label for="email">Email</label>        
+        <input name = "email" class = "form-control" id = "email" [(ngModel)]="utente!.email">                
+        <label for="tel">Telefono</label>        
+        <input name = "tel" class = "form-control" id = "tel" [(ngModel)]="utente!.phone">                
+        <label for="prov">Provincia</label>        
+        <input name = "prov" class = "form-control" id = "prov" [(ngModel)]="utente!.province">                
+        <label for="eta">Età</label>        
+        <input name = "eta" class = "form-control"  type="number" min="0" max="120" step="1" id = "eta" [(ngModel)]="utente!.age">               
+        <label for="dataInserimento">Data Inserimento</label>        
+        <input name = "dataInserimento" class = "form-control"  type="string" min="0" max="120" step="1" id = "eta" [ngModel]="utente!.dataInserimento|date: 'dd-MM-yyyy'" (ngModel)="utente!.dataInserimento" >      
+        <!--<input name = "dataInserimento" type="string" min="0" max="120" step="1" id = "eta" [(ngModel)]="utente!.dataInserimento" >                        -->
+        
+    </div>    
+
+    <div class = "form_group" > 
+        <div class = "row">
+<!--            
+            <div class="col-sm-4">
+                <button class = "reset" class="btn btn btn-danger btn-sm" (click)="resetForm(f.form)">RESET</button>        
+            </div>
+-->            
+            <div class="col-sm-12">            
+                <button *ngIf="lAction=='edit'" class="btn btn-success btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="Salva dati" (click)="saveUser()">
+                    <fa-icon [icon]="faCircleCheck" size="4x"></fa-icon>
+                </button>  
+                <button class="btn btn-warning btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ lTooltip }}" (click)="undo()">
+                    <fa-icon [icon]="faRotateBack" size="4x"></fa-icon>
+                </button>  
+            </div>          
+        </div>       
+    </div>        
+</form>
+

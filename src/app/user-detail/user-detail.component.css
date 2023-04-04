@@ -1,0 +1,70 @@
+  .userDetail{
+    float: left;
+    width: 40%;
+    border: 2px;
+}
+
+.salva {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    width: 80px;
+    margin-right: 10px;
+    
+}
+
+.reset {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+    width: 80px;
+    margin-right: 10px;
+    
+}
+.form_title{
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    border: 1px solid black;
+}
+.form-footer{
+    text-align: center;
+    padding: 10px;
+    
+}
+
+.form_group{
+    padding: 12px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+.form_group label {
+    display: inline-block;
+    text-align: left;    
+    padding: 5px;
+    width: 120px;
+    font-weight: bold;
+    
+}
+.userForm{
+    width: 98%;
+
+}
+
+  
+  input[type=number] { 
+    appearance: textfield;
+    text-align: left;
+    color: black;
+    width: 170px;
+
+    
+    
+}
+
+.btn-space {
+    margin-right: 8px;
+}
