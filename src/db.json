@@ -1,0 +1,48 @@
+{
+  "users": [
+    {
+      "id": 2,
+      "name": "Hidran2",
+      "lastname": "Arias",
+      "email": "hidran@gmail.com",
+      "fiscalcode": "RSAHRN72M22Z444S",
+      "province": "Torino",
+      "phone": "454545455",
+      "age": 43,
+      "dataInserimento": "1899-12-31T23:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Hidran3",
+      "lastname": "Arias",
+      "email": "hidran@gmail.com",
+      "fiscalcode": "RSAHRN72M22Z444S",
+      "province": "Torino",
+      "phone": "454545455",
+      "age": 43,
+      "dataInserimento": "1899-12-31T23:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Hidran4",
+      "lastname": "Arias",
+      "email": "hidran@gmail.com",
+      "fiscalcode": "RSAHRN72M22Z444S",
+      "province": "Torino",
+      "phone": "454545455",
+      "age": 43,
+      "dataInserimento": "1899-12-31T23:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "111",
+      "lastname": "1111",
+      "email": "",
+      "fiscalcode": "",
+      "province": "",
+      "phone": "",
+      "age": 0,
+      "dataInserimento": "2023-03-31T15:17:15.042Z"
+    }
+  ]
+}

@@ -19,7 +19,7 @@ const routes: Routes = [
     redirectTo: 'users'
   },
   {
-    path: 'users/new',    
+    path: 'users/new/:action',    
     component: UserDetailComponent
   },
   {

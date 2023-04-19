@@ -1,49 +1,62 @@
-<form class="userForm" #f="ngForm">
-    <div class = "form_title">
-        <label  *ngIf="utente!.id>0" for="nome">Modifica dati</label>        
-        <label  *ngIf="utente!.id==-1" for="nome">Inserimento</label>        
-           
-    </div>
-    <input type="hidden" name="id" [ngModel]="utente!.id">
-    <div class = "form_group">
-        <label for="nome">Nome</label>        
-        <input name = "nome" class = "form-control" id = "nome" [(ngModel)]="utente!.name" >    
-        <label for="cognome">Cognome</label>        
-        <input name = "cognome" class = "form-control" id = "cognome" [(ngModel)]="utente!.lastname" >        
-        <label for="cfis">Codice fiscale</label>        
-        <!--<input name = "cfis" id = "cfis" value="{{ utente?.fiscalcode }}">    passare solo il dato, invece con ngModule viene aggiornato anche 
-        se uso [input] se uso () output, se uso entrambe sia input che output-->
-        <input name = "cfis" class = "form-control" id = "cfis" [(ngModel)]="utente!.fiscalcode">        
-        <label for="email">Email</label>        
-        <input name = "email" class = "form-control" id = "email" [(ngModel)]="utente!.email">                
-        <label for="tel">Telefono</label>        
-        <input name = "tel" class = "form-control" id = "tel" [(ngModel)]="utente!.phone">                
-        <label for="prov">Provincia</label>        
-        <input name = "prov" class = "form-control" id = "prov" [(ngModel)]="utente!.province">                
-        <label for="eta">Età</label>        
-        <input name = "eta" class = "form-control"  type="number" min="0" max="120" step="1" id = "eta" [(ngModel)]="utente!.age">               
-        <label for="dataInserimento">Data Inserimento</label>        
-        <input name = "dataInserimento" class = "form-control"  type="string" min="0" max="120" step="1" id = "eta" [ngModel]="utente!.dataInserimento|date: 'dd-MM-yyyy'" (ngModel)="utente!.dataInserimento" >      
-        <!--<input name = "dataInserimento" type="string" min="0" max="120" step="1" id = "eta" [(ngModel)]="utente!.dataInserimento" >                        -->
-        
-    </div>    
+{{myjson.stringify(utente)}}
+<div *ngIf="lNotFind==false">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                <th><label  for="nome" class="col-sm-3 col-form-label ">Nome</label> </th>
+                <td><input name = "nome"  id = "nome" [(ngModel)]="utente.name" ></td>
+            </tr>
+            <tr>
+                <th><label  for="cognome" class="col-sm-3 col-form-label">Cognome</label>   </th>
+                <td><input name = "cognome"  id = "cognome" [(ngModel)]="utente.lastname" ></td>
+            </tr>
+            <tr *ngIf=" lAction=='insertUser'">
+                <th><label for="psw" class="col-sm-3 col-form-label">Password</label>   </th>
+                <td><input name = "psw"  id = "psw" [(ngModel)]="utente.password" ></td>
+            </tr>
 
-    <div class = "form_group" > 
-        <div class = "row">
-<!--            
-            <div class="col-sm-4">
-                <button class = "reset" class="btn btn btn-danger btn-sm" (click)="resetForm(f.form)">RESET</button>        
-            </div>
--->            
-            <div class="col-sm-12">            
-                <button *ngIf="lAction=='edit'" class="btn btn-success btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="Salva dati" (click)="saveUser()">
-                    <fa-icon [icon]="faCircleCheck" size="4x"></fa-icon>
-                </button>  
-                <button class="btn btn-warning btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ lTooltip }}" (click)="undo()">
-                    <fa-icon [icon]="faRotateBack" size="4x"></fa-icon>
-                </button>  
-            </div>          
-        </div>       
-    </div>        
-</form>
+            <tr>
+                <th><label for="cfis" class="col-sm-3 col-form-label">Codice fiscale</label>   </th>
+                <td><input name = "cfis"  id = "cfis" [(ngModel)]="utente.fiscalcode" ></td>
+            </tr>
+            <tr>
+                <th><label  for="email" class="col-sm-3 col-form-label">Email</label>   </th>
+                <td><input name = "email"  id = "email" [(ngModel)]="utente!.email" ></td>
+            </tr>
+            <tr>
+                <th><label  for="tel" class="col-sm-3 col-form-label">Telefono</label>  </th>
+                <td><input name = "tel"  id = "tel" [(ngModel)]="utente!.phone" > </td>
+            </tr>
+            <tr>
+                <th><label  for="prov" class="col-sm-3 col-form-label">Provincia</label>    </th>
+                <td><input name = "prov"  id = "prov" [(ngModel)]="utente!.province" >  </td>
+            </tr>
 
+        </tbody>
+    </table>
+
+        <form class="userForm fs-3" #f="ngForm">
+
+        <div class = "form_group" > 
+            <div class = "row">
+    <!--            
+                <div class="col-sm-4">
+                    <button class = "reset" class="btn btn btn-danger btn-sm" (click)="resetForm(f.form)">RESET</button>        
+                </div>
+    -->            
+                <div class="col-sm-12">            
+                    <button *ngIf="lAction =='edit' || lAction=='insertUser'" class="btn btn-success btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="Salva dati" (click)="saveUser()">
+                        <fa-icon [icon]="faCircleCheck" size="4x"></fa-icon>
+                    </button>  
+                    <button class="btn btn-warning btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ lTooltip }}" (click)="undo()">
+                        <fa-icon [icon]="faRotateBack" size="4x"></fa-icon>
+                    </button>  
+                </div>          
+            </div>       
+        </div>        
+    </form>
+</div>
+
+<div *ngIf="lNotFind==true">
+    <h1>Utente insesistente!</h1>
+</div>

@@ -1,7 +1,7 @@
 <table >
     <caption><h2>{{title}}</h2></caption>
     
-    <tr >
+    <tr>
         <th style="width: 7%">Nome</th>
         <th style="width: 7%">Cognome</th>
         <th style="width: 13%">Codice Fiscale</th>
@@ -14,13 +14,16 @@
         
         
     </tr>
-        <tr app-user *ngFor="let utente  of users" [utente]=utente 
+    <tbody *ngIf=" (users$ | async) as users">
+        <tr app-user *ngFor="let utente  of users.data" [utente]=utente 
                     (onDeleteUsers) = "deleteUser($event)" 
                     (onUpdateUsers) = "updateUser($event)"
-                    [routerLink]="['/users/',utente?.id, '/show']" 
+                    id="{{utente.id}}"
+                    
                     >         
+                    <!--[routerLink]="['/users/',utente?.id, '/show']"-->
                     <!-- variabile input --><!-- variabile input -->
         </tr>
-    
+    </tbody>
     
 </table>

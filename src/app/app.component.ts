@@ -20,7 +20,7 @@ export class AppComponent {
   }
 
   insertUser(){
-    console.log("insertUser");
+    console.log("obsoleta insertUser");
     this.userSelected = new User;
     this.userSelected.id = -1;
   }

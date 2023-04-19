@@ -10,6 +10,7 @@ export class User implements UsersInterface{
     phone: string;
     age: number;  
     dataInserimento: Date;
+    password: string;
    
     constructor(){
         this.id=0
@@ -21,5 +22,6 @@ export class User implements UsersInterface{
         this.phone=""
         this.age=0
         this.dataInserimento=new Date();
+        this.password = "";
         }
 }

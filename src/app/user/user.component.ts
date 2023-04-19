@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { userService } from '../services/users.service';
 import { UsersInterface } from '../interfaces/users';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'tr[app-user]',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
+
 })
 export class userComponent implements OnInit{
   @Input() utente: UsersInterface| undefined; //definisco variabile input. puo' essere tipo users o(|) undefined

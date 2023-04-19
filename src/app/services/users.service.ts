@@ -1,95 +1,77 @@
+import { environment } from './../../environments/environment.development';
 
 import { Injectable} from "@angular/core";
 import { UsersInterface } from '../interfaces/users';
 import { User } from '../classes/user';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
+
+export interface UsersResponse {
+    data: User[];
+    message: string;
+  }
+
+  export interface UserResponse {
+    data: User;
+    message: string;
+  }
+
+  
 @Injectable() 
 export class userService{
+    apiurl = environment.APIURL;
+    constructor(private http: HttpClient){
+        
 
-    users: UsersInterface[] = [
-    {
-        id: 1,
-        name: 'Hidran1',
-        lastname: 'Arias',
-        email: 'hidran@gmail.com',
-        fiscalcode: 'RSAHRN72M22Z444S',
-        province: 'Torino',
-        phone: '454545455',
-        age: 43,
-        dataInserimento: new Date('01-01-1900')
-    },
-    {
-        id: 2,
-        name: 'Hidran2',
-        lastname: 'Arias',
-        email: 'hidran@gmail.com',
-        fiscalcode: 'RSAHRN72M22Z444S',
-        province: 'Torino',
-        phone: '454545455',
-        age: 43,
-        dataInserimento:  new Date('01-01-1900')
-    },
-    {
-        id: 3,
-        name: 'Hidran3',
-        lastname: 'Arias',
-        email: 'hidran@gmail.com',
-        fiscalcode: 'RSAHRN72M22Z444S',
-        province: 'Torino',
-        phone: '454545455',
-        age: 43,
-        dataInserimento: new Date('01-01-1900')
-    },
-    {
-        id: 4,
-        name: 'Hidran4',
-        lastname: 'Arias',
-        email: 'hidran@gmail.com',
-        fiscalcode: 'RSAHRN72M22Z444S',
-        province: 'Torino',
-        phone: '454545455',
-        age: 43,
-        dataInserimento: new Date('01-01-1900')
     }
-
-    ];
-
 
     deleteUser(user: UsersInterface){
         console.log(user);
-        const index = this.users.indexOf(user);
-        console.log("index:" + index);
-        if (index > -1 ){            
-            this.users.splice(index,1);
-            console.log("splice:" + this.users);
-        }
-        return this.users;
+        //const index = this.users.indexOf(user);
+        //console.log("index:" + index);
+        //if (index > -1 ){            
+        //    this.users.splice(index,1);
+        //    console.log("splice:" + this.users);
+        //}
+        //return this.users;
+        console.log('delete:' + this.apiurl+ '/' + user.id);
+        return this.http.delete<UserResponse>(this.apiurl+ '/' + user.id)  ;
     } 
 
-    getUsers(){
-        return this.users;        
+    getUsers(): Observable<UsersResponse>{
+        //La sintassi <User[]> significa che ritorna un array di user. Observable che è uno stream di dati
+        console.log('getUsers:' + this.apiurl);
+        return this.http.get<UsersResponse>(this.apiurl)   ;    
     }
 
-    getUser(id: number): User | undefined {
+    getUser(id: number): Observable<UserResponse> {
 
         //return this.users[id];
-        return this.users.find(user => user.id===id)
+        //return this.users.find(user => user.id===id)
+        console.log('getUser:' + this.apiurl+ '/' + id);
+        return this.http.get<UserResponse>(this.apiurl+ '/' + id)   ;
       }
 
-    updateUser(user:UsersInterface){
-        const idx = this.users.findIndex((v)=>v.id==user.id)
+    updateUser(user:UsersInterface): Observable<UserResponse> {
+        //const idx = this.users.findIndex((v)=>v.id==user.id)
         console.log("updateUser:user:" + user.name);
-        if (idx!=-1){
-            this.users[idx] = user;
-        }
+        console.log("updateUser:user:" + user.id);
+        console.log("updateUser:user:" + JSON.stringify(user));
+        //if (idx!=-1){
+        //    this.users[idx] = user;
+        //}
+        return this.http.patch<UserResponse>(this.apiurl+ '/' + user.id,user)  ;
     }
 
-    insertUser(user:UsersInterface){
-        user.id = this.users.length;
-        console.log('insertUser:' || JSON.stringify(user));
-        console.log('insertUser:name:' || user.name);
-        this.users.splice(0,0,user);
+    insertUser(user:UsersInterface): Observable<UserResponse> {
+        //user.id = this.users.length;
+        user.id=0
+        console.log('insertUser:' + JSON.stringify(user));
+        console.log('insertUser:name:' + user.id);
+        //this.users.splice(0,0,user);
         
+        return this.http.post<UserResponse>(this.apiurl ,user)  ;
     }
 
 }

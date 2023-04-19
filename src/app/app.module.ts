@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule  } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,7 @@ import { User } from './classes/user';
 import { PhonePipe } from './pipes/phone.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavComponent } from './nav/nav.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,11 +21,14 @@ import { NavComponent } from './nav/nav.component';
     userComponent,
     UserDetailComponent,
     PhonePipe,
-    NavComponent
+    NavComponent//,
+    //HttpClientModule
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [userService],
   bootstrap: [AppComponent]
