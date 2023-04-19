@@ -1,40 +1,55 @@
 {{myjson.stringify(utente)}}
 <div *ngIf="lNotFind==false">
-    <table class="table table-striped">
-        <tbody>
-            <tr>
-                <th><label  for="nome" class="col-sm-3 col-form-label ">Nome</label> </th>
-                <td><input name = "nome"  id = "nome" [(ngModel)]="utente.name" ></td>
-            </tr>
-            <tr>
-                <th><label  for="cognome" class="col-sm-3 col-form-label">Cognome</label>   </th>
-                <td><input name = "cognome"  id = "cognome" [(ngModel)]="utente.lastname" ></td>
-            </tr>
-            <tr *ngIf=" lAction=='insertUser'">
-                <th><label for="psw" class="col-sm-3 col-form-label">Password</label>   </th>
-                <td><input name = "psw"  id = "psw" [(ngModel)]="utente.password" ></td>
-            </tr>
+    <form #f="ngForm">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th><label  for="nome" class="col-sm-3 col-form-label ">Nome</label> </th>
+                    <td><input #nomeControl = "ngModel" required name = "nome"  id = "nome" [(ngModel)]="utente.name" ></td>
+                </tr>
+                <tr *ngIf="nomeControl.dirty && nomeControl.touched && nomeControl.errors">
+                    <td class="alert-danger col-sm-3 col-form-label"></td>
+                    <td class = 'alert-danger'>Nome Obbligatorio</td>                
+                </tr>    
 
-            <tr>
-                <th><label for="cfis" class="col-sm-3 col-form-label">Codice fiscale</label>   </th>
-                <td><input name = "cfis"  id = "cfis" [(ngModel)]="utente.fiscalcode" ></td>
-            </tr>
-            <tr>
-                <th><label  for="email" class="col-sm-3 col-form-label">Email</label>   </th>
-                <td><input name = "email"  id = "email" [(ngModel)]="utente!.email" ></td>
-            </tr>
-            <tr>
-                <th><label  for="tel" class="col-sm-3 col-form-label">Telefono</label>  </th>
-                <td><input name = "tel"  id = "tel" [(ngModel)]="utente!.phone" > </td>
-            </tr>
-            <tr>
-                <th><label  for="prov" class="col-sm-3 col-form-label">Provincia</label>    </th>
-                <td><input name = "prov"  id = "prov" [(ngModel)]="utente!.province" >  </td>
-            </tr>
+                <tr>
+                    <th><label  for="cognome" class="col-sm-3 col-form-label">Cognome</label>   </th>
+                    <td><input #cognomeControl = "ngModel" required  name = "cognome"  id = "cognome" [(ngModel)]="utente.lastname" ></td>
+                </tr>
+                <tr *ngIf="cognomeControl.dirty && cognomeControl.touched && cognomeControl.errors">
+                    <td class="alert-danger col-sm-3 col-form-label"></td>
+                    <td class = 'alert-danger'>Cognome Obbligatorio</td>                
+                </tr>    
+                                
+                <tr >
+                    <th [hidden]="lAction!='insertUser'"><label for="psw" class="col-sm-3 col-form-label">Password</label>   </th>
+                    <td ><input [hidden]="lAction!='insertUser'"  #password = "ngModel" required minlength = "8" name = "psw"  id = "psw" [(ngModel)]="utente.password" ></td>                    
+                </tr>
 
-        </tbody>
-    </table>
+                <tr *ngIf="password.dirty && password.touched && password.errors">
+                    <th class="alert-danger col-sm-3 col-form-label"></th>
+                    <td class = 'alert-danger' ><label class="col-sm-3 col-form-label">Password obbligatoria</label></td>                
+                </tr>                    
+                <tr>
+                    <th><label for="cfis" class="col-sm-3 col-form-label">Codice fiscale</label>   </th>
+                    <td><input name = "cfis"  id = "cfis" [(ngModel)]="utente.fiscalcode" ></td>
+                </tr>
+                <tr>
+                    <th><label  for="email" class="col-sm-3 col-form-label">Email</label>   </th>
+                    <td><input name = "email"  id = "email" [(ngModel)]="utente!.email" ></td>
+                </tr>
+                <tr>
+                    <th><label  for="tel" class="col-sm-3 col-form-label">Telefono</label>  </th>
+                    <td><input name = "tel"  id = "tel" [(ngModel)]="utente!.phone" > </td>
+                </tr>
+                <tr>
+                    <th><label  for="prov" class="col-sm-3 col-form-label">Provincia</label>    </th>
+                    <td><input name = "prov"  id = "prov" [(ngModel)]="utente!.province" >  </td>
+                </tr>
 
+            </tbody>
+        </table>
+    </form>
         <form class="userForm fs-3" #f="ngForm">
 
         <div class = "form_group" > 
@@ -45,7 +60,7 @@
                 </div>
     -->            
                 <div class="col-sm-12">            
-                    <button *ngIf="lAction =='edit' || lAction=='insertUser'" class="btn btn-success btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="Salva dati" (click)="saveUser()">
+                    <button [disabled]="f.invalid" *ngIf="lAction =='edit' || lAction=='insertUser'" class="btn btn-success btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="Salva dati" (click)="saveUser()">
                         <fa-icon [icon]="faCircleCheck" size="4x"></fa-icon>
                     </button>  
                     <button class="btn btn-warning btn-xs btn-space" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ lTooltip }}" (click)="undo()">
